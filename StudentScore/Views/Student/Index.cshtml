@@ -1,0 +1,101 @@
+﻿@model IEnumerable<StudentScore.Models.Student>;
+@{
+    ViewData["Title"] = "หน้าแรก";
+}
+
+@if (Model.Count() > 0)
+{
+    <div class="container">
+        <h2 class="text-center mt-4 mb-4">ระบบบันทึกคะแนนนักเรียน</h2>
+        <div class="row mb-3">
+            <div class="col-12 col-md-6">
+                <a class="btn btn-success" asp-controller="Student" asp-action="AddStudent">
+                    <i class="bi bi-plus-circle"></i> เพิ่มข้อมูลนักเรียน
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped table-hover text-center">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th scope="col">รหัสนักเรียน</th>
+                            <th scope="col">ชื่อ</th>
+                            <th scope="col">นามสกุล</th>
+                            <th scope="col">คะแนนเก็บ</th>
+                            <th scope="col">คะแนนสอบกลางภาค</th>
+                            <th scope="col">คะแนนสอบปลายภาค</th>
+                            <th scope="col">คะแนนรวม</th>
+                            <th scope="col">เกรดที่ได้</th>
+                            <th scope="col">จัดการข้อมูล</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model)
+                        {
+                            <tr>
+                                <td>@student.ID</td>
+                                <td>@student.FirstName</td>
+                                <td>@student.LastName</td>
+                                <td>@student.Collect</td>
+                                <td>@student.Mid</td>
+                                <td>@student.Final</td>
+                                <td>@student.Total</td>
+                                <td>
+                                    @if (student.Total >= 90)
+                                    {
+                                        <span class="badge bg-success">A</span>
+                                    }
+                                    else if (student.Total >= 80)
+                                    {
+                                        <span class="badge bg-info">B</span>
+                                    }
+                                    else if (student.Total >= 70)
+                                    {
+                                        <span class="badge bg-warning text-dark">C</span>
+                                    }
+                                    else if (student.Total >= 60)
+                                    {
+                                        <span class="badge bg-primary">D</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">F</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-secondary" asp-controller="Student" asp-action="Viewer" asp-route-id="@student.ID">
+                                        <i class="bi bi-eye"></i> ดู
+                                    </a>
+                                    <a class="btn btn-warning text-white" asp-controller="Student" asp-action="EditStudent" asp-route-id="@student.ID">
+                                        <i class="bi bi-pencil-square"></i> แก้ไข
+                                    </a>
+                                    <a class="btn btn-danger" asp-controller="Student" asp-action="DeleteStudent" asp-route-id="@student.ID"
+                                       onclick="return confirm('คุณต้องการลบ @student.FirstName @student.LastName หรือไม่ ?')">
+                                        <i class="bi bi-trash3"></i> ลบ
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="container">
+        <h2 class="text-center mt-4 mb-4">ระบบบันทึกคะแนนนักเรียน</h2>
+        <div class="row mb-3">
+            <div class="col-12 col-md-6">
+                <a class="btn btn-success" asp-controller="Student" asp-action="AddStudent">
+                    <i class="bi bi-plus-circle"></i> เพิ่มข้อมูลนักเรียน
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-secondary text-center">ไม่พบข้อมูล</div>
+}
+
