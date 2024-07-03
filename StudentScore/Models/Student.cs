@@ -16,5 +16,6 @@ namespace StudentScore.Models
         public int Mid { get; set; }
         public int Final { get; set; }
         public int Total { get; set; }
+        public string? Grade { get; set; }
     }
 }

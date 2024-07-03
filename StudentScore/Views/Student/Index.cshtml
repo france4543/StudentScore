@@ -42,25 +42,25 @@
                                 <td>@student.Final</td>
                                 <td>@student.Total</td>
                                 <td>
-                                    @if (student.Total >= 90)
+                                    @if (student.Grade == "A")
                                     {
-                                        <span class="badge bg-success">A</span>
+                                        <span class="badge bg-success">@student.Grade</span>
                                     }
-                                    else if (student.Total >= 80)
+                                    else if (student.Grade == "B")
                                     {
-                                        <span class="badge bg-info">B</span>
+                                        <span class="badge bg-info">@student.Grade</span>
                                     }
-                                    else if (student.Total >= 70)
+                                    else if (student.Grade == "C")
                                     {
-                                        <span class="badge bg-warning text-dark">C</span>
+                                        <span class="badge bg-warning text-dark">@student.Grade</span>
                                     }
-                                    else if (student.Total >= 60)
+                                    else if (student.Grade == "D")
                                     {
-                                        <span class="badge bg-primary">D</span>
+                                        <span class="badge bg-primary">@student.Grade</span>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-danger">F</span>
+                                        <span class="badge bg-danger">@student.Grade</span>
                                     }
                                 </td>
                                 <td>

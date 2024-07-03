@@ -30,6 +30,7 @@ namespace StudentScore.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var Result = Student.Collect + Student.Mid + Student.Final;
                     var Model = new Student();
                     Model.ID = Student.ID;
                     Model.FirstName = Student.FirstName;
@@ -37,7 +38,26 @@ namespace StudentScore.Controllers
                     Model.Collect = Student.Collect;
                     Model.Mid = Student.Mid;
                     Model.Final = Student.Final;
-                    Model.Total = Student.Collect + Student.Mid + Student.Final;
+                    Model.Total = Result;
+                    if (Result >= 90)
+                    {
+                        Model.Grade = "A";
+                    }
+                    else if (Result >= 80)
+                    {
+                        Model.Grade = "B";
+                    }
+                    else if (Result >= 70)
+                    {
+                        Model.Grade = "C";
+                    }
+                    else if (Result >= 60)
+                    {
+                        Model.Grade = "D";
+                    }
+                    else {
+                        Model.Grade = "F";
+                    }
                     DB.Students.Add(Model);
                     DB.SaveChanges();
                     return RedirectToAction("Index");
@@ -75,6 +95,7 @@ namespace StudentScore.Controllers
         {
             if (ModelState.IsValid)
             {
+                var Result = Student.Collect + Student.Mid + Student.Final;
                 var GetStudent = DB.Students.Where(w=>w.ID == Student.ID).FirstOrDefault();
                 GetStudent.ID = Student.ID;
                 GetStudent.FirstName = Student.FirstName;
@@ -82,7 +103,27 @@ namespace StudentScore.Controllers
                 GetStudent.Collect = Student.Collect;
                 GetStudent.Mid = Student.Mid;
                 GetStudent.Final = Student.Final;
-                GetStudent.Total = Student.Collect + Student.Mid + Student.Final;
+                GetStudent.Total = Result;
+                if (Result >= 90)
+                {
+                    GetStudent.Grade = "A";
+                }
+                else if (Result >= 80)
+                {
+                    GetStudent.Grade = "B";
+                }
+                else if (Result >= 70)
+                {
+                    GetStudent.Grade = "C";
+                }
+                else if (Result >= 60)
+                {
+                    GetStudent.Grade = "D";
+                }
+                else
+                {
+                    GetStudent.Grade = "F";
+                }
                 DB.Students.Update(GetStudent);
                 DB.SaveChanges();
                 return RedirectToAction("Index");

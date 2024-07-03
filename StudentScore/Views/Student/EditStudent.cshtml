@@ -33,6 +33,10 @@
                     <label asp-for="Total">คะแนนรวม</label>
                     <input type="number" asp-for="Total" class="form-control" disabled />
                 </div>
+                <div class="form-group">
+                    <label asp-for="Grade">เกรด</label>
+                    <input type="text" asp-for="Grade" class="form-control" disabled />
+                </div>
                 <div class="col-md-12 text-center">
                     <button type="submit" class="btn btn-primary my-2">อัพเดต</button>
                     <button type="button" class="btn btn-danger my-2" onclick="history.back()">ยกเลิก</button>
@@ -48,10 +52,20 @@
         var collect = parseFloat(document.getElementById('Collect').value);
         var mid = parseFloat(document.getElementById('Mid').value);
         var final = parseFloat(document.getElementById('Final').value);
+        var firstname = document.getElementById('FirstName').value;
+        var lastname = document.getElementById('LastName').value;
 
         var total = collect + mid + final;
         if (total > 100) {
             alert('ผลรวมของคะแนนเกิน 100 คะแนน');
+            return false;
+        }
+        if (collect < 0 || mid < 0 || final < 0 || total < 0) {
+            alert('ผลรวมไม่สามารถติดลบได้');
+            return false;
+        }
+        if (firstname == "" || lastname == "") {
+            alert('กรุณากรอกชื่อ - นามสกุล');
             return false;
         }
         return true;
